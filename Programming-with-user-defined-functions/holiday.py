@@ -1,7 +1,3 @@
-# Asking to user how many people.
-num_of_people = int(input("How many of you are going on holiday?"))
-
-# Create a def of citys that we can recall later.
 def display_citys():
     """Displays the city options to the user."""
     print("Where would you like to go on holiday?")
@@ -12,95 +8,49 @@ def display_citys():
     print("5. France")
     print("6. Exit")
 
-# Asking the user to select an option, storing as variable.
-# This will loop until they pick 1 to 6.
 def get_user_choice():
+    """Asks the user to select a destination and returns their choice."""
     while True:
         display_citys()
         des_choice = input("Enter your choice: ")
-        
         if des_choice in ['1', '2', '3', '4', '5', '6']:
             return des_choice
         else:
             print("Invalid choice. Please select a number bettween 1 and 6.")
 
-# Results for each selection.
-while True: 
+def plane_cost():
+    """Calculates the cost of the plane ticket based on user's choice."""
     user_choice = get_user_choice()
-    
     if user_choice == '1':
-        # This is the cost of the plane ticket pp.
-        city_flight = 100
-        # Lets the user know we have their selection.
-        print("Spain selected")
-        print(f"Your flights will cost £{city_flight} per person")
-        # Calculate the total cost relative to number of people.
-        plane_cost = city_flight * num_of_people
-        print(f"This comes to £{plane_cost} for everyone")
-        break
-
+        return 100
     elif user_choice == '2':
-        city_flight = 200
-        print("Germany selected.")
-        print(f"Your flights will cost £{city_flight} per person")
-        plane_cost = city_flight * num_of_people
-        print(f"This comes to £{plane_cost} for everyone")
-        break
-
+        return 200
     elif user_choice == '3':
-        city_flight = 300
-        print("Portugal selected.")
-        print(f"Your flights will cost £{city_flight} per person")
-        plane_cost = city_flight * num_of_people
-        print(f"This comes to £{plane_cost} for everyone")
-        break
-
+        return 300
     elif user_choice == '4':
-        city_flight = 400
-        print("Greece selected.")
-        print(f"Your flights will cost £{city_flight} per person")
-        plane_cost = city_flight * num_of_people
-        print(f"This comes to £{plane_cost} for everyone")
-        break
-
+        return 400
     elif user_choice == '5':
-        city_flight = 500
-        print("France selected.")
-        print(f"Your flights will cost £{city_flight} per person")
-        plane_cost = city_flight * num_of_people
-        print(f"This comes to £{plane_cost} for everyone")
-        break
-
-    # If the user selects to exit we break the loop.
-    elif user_choice == '6':
-        print("Exiting program.")
-        break
-    # If the user selects anything else we break the loop.
+        return 500
     else:
-        print("An unexpected error occurred.")
-        break
+        return 0
 
 
-# Ask the user how many nights they are staying. Store as variable.
-num_nights = int(input("How many nights do you want to stay?"))
-# The hotel will be £300 per night.
-# Work out the hotel cost by doing number of nights x nightly rate.
-hotel_cost = num_nights * 300
-# Work out a per person price by dividing hotel cost by amount of people.
-hotel_pp = hotel_cost/num_of_people
-print(f"Your hotel for {num_nights} nights will cost £{hotel_pp} per person")
-print(f"This will be {hotel_cost} total")
+def hotel_cost():
+    """Calculates the total cost for the hotel stay."""
+    num_nights = int(input("How many nights do you want to stay?"))
+    return num_nights * 300
 
-# Ask the user how many days car rental they want. Store as variable.
-rental_days = int(input("How many days car rental do you want?"))
-# The rental daily cost is £100.
-# Work out the rental cost by mulitplying rental days by daily cost.
-car_rental = rental_days * 150
-print(f"Your rental for {rental_days} days will cost £{car_rental}")
+def car_rental():
+    """Calculates the total cost for the car rental."""
+    rental_days = int(input("How many days car rental do you want?"))
+    return rental_days * 150
 
-# Work out the total cost of the trip by adding flights, hotel and car charges.
-holiday_cost = plane_cost + hotel_cost + car_rental
-print(f"Your entire holiday will cost £{holiday_cost:.2f} for {num_of_people} of you.")
-# Calculate a per person price by dividing the total cost by num people.
-holiday_pp = holiday_cost / num_of_people
-print(f"This would be £{holiday_pp:.2f} per person.")
+def holiday_cost():
+    """Calculates the total holiday cost."""
+    flight_cost = plane_cost()
+    hotel_total = hotel_cost()
+    rental_total = car_rental()
+    total_cost = flight_cost + hotel_total + rental_total
+    print(f"Your entire holiday will cost £{total_cost:.2f}")
+
+holiday_cost()
